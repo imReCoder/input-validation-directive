@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <h1>Virtual Machine</h1>
+  <ng-container *ngFor="let input of vmNames; let i = index">
+
+    <div class="vm-name">
+      <input name="vm name" placeholder="enter vm name" [(ngModel)]="input.value" appVmNameValidator
+        [validationValues]="getCurrentVms" #inputCtrl="ngModel" (ngModelChange)="onVmNameChange($event,inputCtrl)">
+      <small
+        *ngIf="inputCtrl.hasError('vmNameValidation') && inputCtrl.errors?.['vmNameValidation'] && !inputCtrl.errors?.['vmNameValidation'].isLocalExist && inputCtrl.dirty"
+        class="error-message">
+        Vm name already exist
+      </small>
+      <small
+        *ngIf="inputCtrl.hasError('vmNameValidation') && inputCtrl.errors?.['vmNameValidation'].isLocalExist && inputCtrl.dirty"
+        class="error-message">
+        Vm name already written
+      </small>
+      <div>
+        errors: {{inputCtrl.errors | json }}
+      </div>
+    </div>
+    <br>
+  </ng-container>
+
+</div>
